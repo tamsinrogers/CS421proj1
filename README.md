@@ -61,11 +61,17 @@ Comparison of my results (left) to initial study results (right):
 
 NOISE:
 <p>
+I found that CHAIN performed the best.
+</p>
+<p>
   <img width="400" alt="mynoise" src="https://user-images.githubusercontent.com/30237570/218918210-747cdcd4-10b9-44b6-87b2-a5f0c2c791fd.png">
   <img width="400" alt="noise" src="https://user-images.githubusercontent.com/30237570/218870730-c16cf190-f044-4dc1-a4e4-278a072cffcc.png">
 </p>
 
 SLOPE:
+<p>
+I found that WARP, CLUSTER, SEGMENT, SPLIT, STRETCH, and, MERGE were invariant.
+</p>
 <p>
   <img width="400" alt="myslope" src="https://user-images.githubusercontent.com/30237570/218874480-636133a6-927d-4fe6-a54a-2965f200e5d6.png">
   <img width="400" alt="slope" src="https://user-images.githubusercontent.com/30237570/218870748-011c6c30-3647-4f77-97e8-6e79e6bcea72.png">
@@ -73,17 +79,26 @@ SLOPE:
   
 SHIFT:
 <p>
+I found that WARP, CLUSTER, SEGMENT, SPLIT, STRETCH, and MERGE were invariant.
+</p>
+<p>
   <img width="400" alt="myshift" src="https://user-images.githubusercontent.com/30237570/218874518-69cd30b3-fd6d-45c4-a33e-0787c52453a9.png">
   <img width="400" alt="shift" src="https://user-images.githubusercontent.com/30237570/218870763-4debf349-bc66-4f88-8a43-1f1300b93f94.png">
 </p>
 
 WITHIN-LINE REGRESSION:
 <p>
+My results were not very accurate.  I found ATTACH, CHAIN, and REGRESS to work the best.
+</p>
+<p>
  <img width="400" alt="mywithin" src="https://user-images.githubusercontent.com/30237570/219226438-e1ccd4a3-2124-41f0-98cf-aba684442f70.png">
 <img width="400" alt="within" src="https://user-images.githubusercontent.com/30237570/218870782-f8dd5dea-ba52-46c6-8186-f729fdb4d88b.png">
 </p>
 
 BETWEEN-LINE REGRESSION:
+<p>
+My results were not very accurate.  I found ATTACH, CHAIN, and REGRESS to work the best.
+</p>
 <p>
   <img width="400" alt="mybetween" src="https://user-images.githubusercontent.com/30237570/219250944-491a7129-e12d-41ff-9bdc-dec6f149a349.png">
 <img width="400" alt="between" src="https://user-images.githubusercontent.com/30237570/218870794-7f11d4ef-848f-4b2c-8021-fd0e6cb54d99.png">
