@@ -1,3 +1,4 @@
+# THIS IS THE FINAL VERSION OF CORRECTION.PY
 
 # function to generate fixations at each word
 def generate_fixations_left_skip_regression(aois_with_tokens):
@@ -45,7 +46,7 @@ def generate_fixations_left_skip_regression(aois_with_tokens):
     
     return fixations
 
-# noise
+# ********************************** NOISE **********************************
 import random
 
 def error_noise(y_noise_probability, y_noise, duration_noise, fixations):
@@ -72,7 +73,7 @@ def error_noise(y_noise_probability, y_noise, duration_noise, fixations):
     
     return results
 
-# SLOPE
+# ********************************** SLOPE **********************************
 def error_slope(y_slope, fixations):
 
     results = []
@@ -86,7 +87,7 @@ def error_slope(y_slope, fixations):
     return results
 
 
-# SHIFT
+# ********************************** SHIFT **********************************
 def error_shift(y_shift, fixations):
 
     results = []
@@ -99,7 +100,7 @@ def error_shift(y_shift, fixations):
         
     return results
 
-
+# ********************************** WITHIN LINE REGRESSION **********************************
 def within(reg_prob, fixations):
     
     results = []
@@ -134,6 +135,7 @@ def within(reg_prob, fixations):
 
     return results
 
+# ********************************** BETWEEN LINE REGRESSION **********************************
 def between(reg_prob, fixations):
 
     results = []
