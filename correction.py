@@ -107,7 +107,7 @@ def within(reg_prob, fixations):
     fixation_length = len(fixations)
     i = 0
     newLine = 0
-    fix = 0
+    lastLine = 0
     
     regRange = np.random.default_rng() # range to calculate regression over
 
@@ -115,14 +115,13 @@ def within(reg_prob, fixations):
 
         x, y, duration = (fixations[i][0], fixations[i][1], fixations[i][2])
 
-        if x < fix:
-            line_start = i             # new line
+        if x < lastLine:
+            newLine = i               # new line
 
-        if random.random() < reg_prob: # caculate probability of regression
+        if random.random() < reg_prob: # calculate probability of regression
 
             try:
- 
-                index = int(regRange.triangular(newLine, i, i, 1)[0]) # random regression value
+                index = int(regRange.triangular(newLine, i, i, 1)[0]) # calculate regression model
                 results.extend(fixations[index:i])
 
             except ValueError:
@@ -130,7 +129,7 @@ def within(reg_prob, fixations):
 
         results.append(fixations[i])
 
-        fix = x
+        lastLine = x
         i += 1
 
     return results
@@ -138,13 +137,13 @@ def within(reg_prob, fixations):
 def between(reg_prob, fixations):
 
     results = []
-    
+
     fixation_length = len(fixations)
     i = 0
     lines = 0
     newLine = 0
-    line_indices = {}
-    fix = 0
+    lineNumbers = {}
+    lastLine = 0
     
     regRange = np.random.default_rng() # range to calculate regression over
 
@@ -152,32 +151,30 @@ def between(reg_prob, fixations):
 
         x, y, duration = (fixations[i][0], fixations[i][1], fixations[i][2])
 
-        if x < fix:
+        if x < lastLine:
 
-            line_indices[fixation_length] = np.arange(newLine, i, 1)
-            lines += 1
-            newLine = i
-
+            lineNumbers[lines] = np.arange(newLine, i, 1)
+            lines += 1  
+            newLine = i  # new line
+            
         if random.random() < reg_prob: # calculate probability of regression
 
             try:
-     
-                line = int(regRange.triangular(0, fixation_length, fixation_length, 1)[0]) # calculate regression model
-                indices = line_indices[line]
-                forResults = regRange.choice(indices, 2, replace=False)
-                forResults.sort()
-                results.extend(fixations[forResults[0]:forResults[1]])
+                line = int(regRange.triangular(0, lines, lines, 1)[0]) # calculate regression model
+                indices = lineNumbers[line]
+                fixes = regRange.choice(indices, 2, replace=False)
+                fixes.sort()
+                results.extend(fixations[fixes[0]:fixes[1]])
 
             except ValueError:
                 pass
 
         results.append(fixations[i])
 
-        fix = x
+        lastLine = x
         i += 1
 
     return results
-
 
 
 from PIL import ImageFont, ImageDraw, Image
