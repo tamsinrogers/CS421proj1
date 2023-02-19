@@ -49,7 +49,7 @@ def generate_fixations_left_skip_regression(aois_with_tokens):
 # ********************************** NOISE **********************************
 import random
 
-def error_noise(y_noise_probability, y_noise, duration_noise, fixations):
+def error_noise(prob, y_noise, duration_noise, fixations):
     '''creates a random error moving a percentage of fixations '''
     
     results = []
@@ -66,7 +66,7 @@ def error_noise(y_noise_probability, y_noise, duration_noise, fixations):
         if duration < 0:
             duration *= -1
         
-        if random.random() < y_noise_probability:
+        if random.random() < prob:
             results.append([x, y + random.randint(-y_noise, y_noise), duration])
         else:
             results.append([x, y, fix[2]])
@@ -101,7 +101,7 @@ def error_shift(y_shift, fixations):
     return results
 
 # ********************************** WITHIN LINE REGRESSION **********************************
-def within(reg_prob, fixations):
+def within(prob, fixations):
     
     results = []
 
@@ -119,14 +119,9 @@ def within(reg_prob, fixations):
         if x < lastLine:
             newLine = i               # new line
 
-        if random.random() < reg_prob: # calculate probability of regression
-
-            try:
-                index = int(regRange.triangular(newLine, i, i, 1)[0]) # calculate regression model
-                results.extend(fixations[index:i])
-
-            except ValueError:
-                pass
+        if random.random() < prob: # calculate probability of regression
+            index = int(regRange.triangular(newLine, i, i, 1)[0]) # calculate regression model
+            results.extend(fixations[index:i])
 
         results.append(fixations[i])
 
@@ -136,7 +131,7 @@ def within(reg_prob, fixations):
     return results
 
 # ********************************** BETWEEN LINE REGRESSION **********************************
-def between(reg_prob, fixations):
+def between(prob, fixations):
 
     results = []
 
@@ -159,17 +154,13 @@ def between(reg_prob, fixations):
             lines += 1  
             newLine = i  # new line
             
-        if random.random() < reg_prob: # calculate probability of regression
-
-            try:
-                line = int(regRange.triangular(0, lines, lines, 1)[0]) # calculate regression model
-                indices = lineNumbers[line]
-                fixes = regRange.choice(indices, 2, replace=False)
-                fixes.sort()
-                results.extend(fixations[fixes[0]:fixes[1]])
-
-            except ValueError:
-                pass
+        if random.random() < prob: # calculate probability of regression
+            
+            line = int(regRange.triangular(0, lines, lines, 1)[0]) # calculate regression model
+            indices = lineNumbers[line]
+            fixes = regRange.choice(indices, 2, replace=False)
+            fixes.sort()
+            results.extend(fixations[fixes[0]:fixes[1]])
 
         results.append(fixations[i])
 
